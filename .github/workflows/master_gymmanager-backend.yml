@@ -69,8 +69,9 @@ jobs:
 
       - name: 'Run migrations on Azure App'
         run: |
-          source venv/bin/activate
-          python manage.py migrate
+            cd backend  # Change to the backend directory where manage.py is located
+            source ../venv/bin/activate
+            python manage.py migrate
         env:
-          DJANGO_SETTINGS_MODULE: 'gymmanager.settings'  # Specify your settings module
-          DATABASE_URL: ${{ secrets.AZURE_POSTGRES_DB_URL }} 
+            DJANGO_SETTINGS_MODULE: 'gymmanager.settings'  # Adjust as per your project settings
+            DATABASE_URL: ${{ secrets.AZURE_POSTGRES_DB_URL }} 
