@@ -67,10 +67,11 @@ jobs:
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
 
       # Post-deployment step to run migrations from backend directory
-      - name: 'Run migrations on Azure App'
+      - name: Create and start virtual environment
         run: |
-          cd backend  # Change to backend directory where manage.py is located
-          source ../venv/bin/activate  # Activate the virtual environment
+          cd backend
+          python -m venv venv
+          source venv/bin/activate
           python manage.py migrate  # Run migrations
         env:
           DJANGO_SETTINGS_MODULE: 'gymmanager.settings'
