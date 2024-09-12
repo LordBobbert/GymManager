@@ -27,7 +27,7 @@ jobs:
         run: |
           source venv/bin/activate
           pip install --upgrade pip
-          pip install -r backend/requirements.txt  # Ensure requirements are installed in venv
+          pip install -r backend/requirements.txt  # Install requirements from backend
 
       - name: Zip artifact for deployment
         run: |
