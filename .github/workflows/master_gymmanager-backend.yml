@@ -20,14 +20,16 @@ jobs:
 
       - name: Create and start virtual environment
         run: |
-          python -m venv venv
-          source venv/bin/activate
+          cd backend  # Ensure we're in the backend directory
+          python -m venv venv  # Create virtual environment in backend folder
+          source venv/bin/activate  # Activate venv
 
       - name: Install dependencies
         run: |
+          cd backend
           source venv/bin/activate
           pip install --upgrade pip
-          pip install -r backend/requirements.txt  # Install requirements from backend
+          pip install -r requirements.txt  # Install from backend/requirements.txt
 
       - name: Zip artifact for deployment
         run: |
@@ -47,7 +49,6 @@ jobs:
     needs: build
     environment:
       name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
       - name: Download artifact from build job
@@ -66,12 +67,10 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
 
-      # Post-deployment step to run migrations from backend directory
-      - name: Create and start virtual environment
+      - name: 'Run migrations on Azure App'
         run: |
-          cd backend
-          python -m venv venv
-          source venv/bin/activate
+          cd backend  # Change to backend directory where manage.py is located
+          source venv/bin/activate  # Activate the virtual environment in backend folder
           python manage.py migrate  # Run migrations
         env:
           DJANGO_SETTINGS_MODULE: 'gymmanager.settings'
