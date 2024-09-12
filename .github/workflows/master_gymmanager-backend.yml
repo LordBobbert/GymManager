@@ -72,5 +72,5 @@ jobs:
           source venv/bin/activate
           python manage.py migrate
         env:
-          DJANGO_SETTINGS_MODULE: 'your_project.settings'  # Specify your settings module
+          DJANGO_SETTINGS_MODULE: 'gymmanager.settings'  # Specify your settings module
           DATABASE_URL: ${{ secrets.AZURE_POSTGRES_DB_URL }} 
