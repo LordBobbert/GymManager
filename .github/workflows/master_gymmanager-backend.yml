@@ -65,3 +65,12 @@ jobs:
           app-name: 'gymmanager-backend'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F19924B0C97F48A587AF9057AAF0D16A }}
+
+
+      - name: 'Run migrations on Azure App'
+        run: |
+          source venv/bin/activate
+          python manage.py migrate
+        env:
+          DJANGO_SETTINGS_MODULE: 'your_project.settings'  # Specify your settings module
+          DATABASE_URL: ${{ secrets.AZURE_POSTGRES_DB_URL }} 
