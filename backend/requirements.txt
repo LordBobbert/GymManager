@@ -8,7 +8,7 @@ djangorestframework==3.14.0
 djangorestframework-simplejwt==5.2.2
 
 # PostgreSQL Database adapter for Django
-psycopg2-binary==2.9.6
+psycopg2-binary
 
 # For handling environment variables securely
 python-decouple==3.8
@@ -34,4 +34,4 @@ django-environ==0.10.0
 
 # Security best practices and securing headers
 django-secure==1.0.1
-django-sslserver==0.24
+django-sslserver
